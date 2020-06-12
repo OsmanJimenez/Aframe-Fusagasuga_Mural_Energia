@@ -1,132 +1,187 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <title>Fusatour Museo</title>
-      <!-- <script src="libs/aframe.min.js"></script> -->  
-          <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <head>
+    <title>Fusatour Mural_ENegia</title>
 
-        <script src="libs/aframe-extras.min.js"></script>
-        <script>
-            // Set up the component to handle turning on and off the main lights.
-            AFRAME.registerComponent("toggle-main-lights", {
-                init: function() {
-                    var state = true;
-                    var self = this.el;
-                    self.addEventListener("click", function(evt) {
-                        var newIntensity;
-                        if (state) {
-                            newIntensity = 0;
-                            state = false;
-                            document.querySelector("#Lever").emit("lightOff");
-                        } else {
-                            newIntensity = 0.75;
-                            state = true;
-                            document.querySelector("#Lever").emit("lightOn")
-                        }
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <!-- <script src="libs/aframe.min.js"></script> -->
+    <script src="libs/aframe-extras.min.js"></script>
+  </head>
+  <body>
+    <a-scene light="defaultLightsEnabled: false" shadow="type=pcfsoft">
+      <a-entity light="type: ambient; intensity: 0.1"></a-entity>
 
-                        var lights = document.querySelectorAll(".MainLighting");
-                        for (var i = 0; i < lights.length; i++) {
-                            lights[i].setAttribute("light", {intensity: newIntensity}, false);
-                        }
-                    });
-                }
-            });
+      <a-sky color="#87CEEB"></a-sky>
 
+      <a-entity position="0 0 0">
+        <a-camera universal-controls>
+          <a-entity
+            raycaster="far: 150; objects: .intersectable"
+            cursor
+            geometry="primitive: ring; radiusOuter: 0.015;
+                              radiusInner: 0.01; segmentsTheta: 32"
+            material="color: #283644; shader: flat"
+            position="0 0 -0.75"
+          ></a-entity>
+        </a-camera>
+      </a-entity>
 
-            // Set up component to handle turning on and off the desk lamp light.
-            AFRAME.registerComponent("desk-lamp-toggle", {
-                init: function() {
-                    var on = false;
-                    var self = this.el;
-                    self.addEventListener("click", function(evt) {
-                        var newLighting;
-                        if (on) {
-                            on = false;
-                            newLighting = {intensity: "0"};
-                        } else {
-                            on = true;
-                            newLighting = {intensity: "0.6"};
-                        }
+      <!--x y z -->
+      <!--Floor -->
+      <a-entity
+        geometry="primitive:box; depth: 20; height:0.1; width: 30"
+        position="0 0 0"
+        material="src: url(images/floor.jpg); repeat: 30 20; metalness: 0; roughness: 1 "
+      >
+      </a-entity>
 
-                        self.setAttribute("light", newLighting, false);
-                    })
-                }
-            })
-        </script>
-    </head>
-    <body>
-        <a-scene light="defaultLightsEnabled: false" shadow="type=pcfsoft">
-            <a-entity light="type: ambient; intensity: 0.1"></a-entity>
+      <!--Ceiling -->
+      <a-entity
+        geometry="primitive:box; depth: 20; height:0.1; width: 30"
+        position="0 10 0"
+        material="src: url(images/wall_2.jpg); repeat: 10 15; metalness: 0; roughness: 1"
+      >
+      </a-entity>
 
-            <!--<a-sky color="#191970"></a-sky>-->
-            <a-sky color="#87CEEB"></a-sky>
-            <a-entity position="0 0 0">
-                <a-camera universal-controls>
-                    <a-entity raycaster="far: 150; objects: .intersectable" cursor geometry="primitive: ring; radiusOuter: 0.015;
-                              radiusInner: 0.01; segmentsTheta: 32" material="color: #283644; shader: flat" position="0 0 -0.75"></a-entity>
-                </a-camera>
-            </a-entity>
+      <!--North Wall Pictures-->
+      <a-entity
+        geometry="primitive: box; depth: 0.2; height:10; width: 30"
+        position="0 5 10"
+        material="src: url(images/wall.jpg); repeat: 30 10; metalness: 0; roughness: 1"
+      >
+      </a-entity>
 
-  
+      <a-text
+        value="Mural Energia"
+        aling="center"
+        color="#fff"
+        position="-3.9 6 -9.5"
+        scale="6.4 9.3 8.9"
+      >
+      </a-text>
 
-            <!--x y z -->
-            <!--Floor -->
-            <a-entity geometry="primitive:box; depth: 20; height:0.1; width: 30" position="0 0 0" material="src: url(images/floor.jpg); repeat: 30 20; metalness: 0; roughness: 1 " ></a-entity>
+      <!--East Wall-->
+      <a-entity
+        geometry="primitive: box; depth: 17.5; height: 1.25; width: 0.2"
+        position="15 9.375 0"
+        material="src: url(images/wall_2.jpg); repeat: 17.5 1.25; metalness: 0; roughness: 1"
+      >
+      </a-entity>
 
-            <!--Ceiling -->
-            <a-entity geometry="primitive:box; depth: 20; height:0.1; width: 30" position="0 10 0" material="src: url(images/wall_2.jpg); repeat: 10 15; metalness: 0; roughness: 1"></a-entity>
+      <a-entity
+        geometry="primitive: box; depth: 17.5; height: 1.25; width: 0.2"
+        position="15 0.625 0"
+        material="src: url(images/wall_2.jpg); repeat: 17.5 1.25; metalness: 0; roughness: 1"
+      >
+      </a-entity>
 
-            <!--North Wall Pictures-->
-            <a-entity geometry="primitive: box; depth: 0.2; height:10; width: 30" position="0 5 10" material="src: url(images/wall.jpg); repeat: 30 10; metalness: 0; roughness: 1"></a-entity>
-            <a-text value="Mural Energia" aling="center" color="#fff" position="-3.9 6 -9.5" scale="6.4 9.3 8.9"></a-text> 
+      <a-entity
+        geometry="primitive: box; depth: 1.25; height: 10; width: 0.2"
+        position="15 5 9.375"
+        material="src:url(images/wall_2.jpg); repeat: 1.25 10; metalness: 0; roughness: 1"
+      >
+      </a-entity>
 
-            <!--East Wall-->
-            <a-entity geometry="primitive: box; depth: 17.5; height: 1.25; width: 0.2" position="15 9.375 0" material="src: url(images/wall_2.jpg); repeat: 17.5 1.25; metalness: 0; roughness: 1"></a-entity>
-            <a-entity geometry="primitive: box; depth: 17.5; height: 1.25; width: 0.2" position="15 0.625 0" material="src: url(images/wall_2.jpg); repeat: 17.5 1.25; metalness: 0; roughness: 1"></a-entity>
-            <a-entity geometry="primitive: box; depth: 1.25; height: 10; width: 0.2" position="15 5 9.375" material="src:url(images/wall_2.jpg); repeat: 1.25 10; metalness: 0; roughness: 1"></a-entity>
-            <a-entity geometry="primitive: box; depth: 1.25; height: 10; width: 0.2" position="15 5 -9.375" material="src:url(images/wall_2.jpg); repeat: 1.25 10; metalness: 0; roughness: 1"></a-entity>
-            <!--Window in East Wall -->
-            <a-entity geometry="primitive: box; depth: 17.5; height: 7.5; width: 0.1"
-                      position="15 5 0" material="src: url(images/Mural_Energia.jpeg)"></a-entity>
+      <a-entity
+        geometry="primitive: box; depth: 1.25; height: 10; width: 0.2"
+        position="15 5 -9.375"
+        material="src:url(images/wall_2.jpg); repeat: 1.25 10; metalness: 0; roughness: 1"
+      >
+      </a-entity>
 
-            <!--<a-entity geometry="primitive: box; depth: 9; height: 7.5; width: 0.1"-->
-                      <!--position="15 5 0" material="src: url(images/glass.jpg); repeat: 7.5 7.5; opacity: 0.3;-->
-                      <!--transparent: true; metalness: 0.1"></a-entity>-->
-            <!-- West Wall-->
-            <a-entity geometry="primitive: box; depth: 15; height: 10; width: 0.2" position="-15 5 -2.5" material="src: url(images/wall_2.jpg); repeat: 15 10; metalness: 0; roughness: 1"></a-entity>           
-            <a-entity geometry="primitive: box; depth: 2; height: 10; width: 0.2" position="-15 5 9" material="src: url(images/wall_2.jpg); repeat: 2 10; metalness: 0; roughness: 1"></a-entity>
-            <a-entity geometry="primitive: box; depth: 3; height: 5; width: 0.2" position="-15 7.5 6.5" material="src: url(images/wall_2.jpg); repeat: 3 5; metalness: 0; roughness: 1"></a-entity>
+      <!--Window in East Wall -->
+      <a-entity
+        geometry="primitive: box; depth: 17.5; height: 7.5; width: 0.1"
+        position="15 5 0"
+        material="src: url(images/Mural_Energia.jpeg)"
+      >
+      </a-entity>
 
-            <a-entity geometry="primitive: box; depth: 15; height:10; width: 0.2" position="-15 5 10" material="src: url(images/wall_2.jpg); repeat: 30 10; metalness: 0; roughness: 1"></a-entity>
+      <a-entity
+        geometry="primitive: box; depth: 15; height: 10; width: 0.2"
+        position="-15 5 -2.5"
+        material="src: url(images/wall_2.jpg); repeat: 15 10; metalness: 0; roughness: 1"
+      >
+      </a-entity>
 
+      <a-entity
+        geometry="primitive: box; depth: 2; height: 10; width: 0.2"
+        position="-15 5 9"
+        material="src: url(images/wall_2.jpg); repeat: 2 10; metalness: 0; roughness: 1"
+      >
+      </a-entity>
 
-            <!--South Wall-->
-            <a-entity geometry="primitive: box; depth: 0.2; height:10; width: 30" position="0 5 -10" material="src: url(images/wall.jpg); repeat: 30 10; metalness: 0; roughness: 1"></a-entity>
+      <a-entity
+        geometry="primitive: box; depth: 3; height: 5; width: 0.2"
+        position="-15 7.5 6.5"
+        material="src: url(images/wall_2.jpg); repeat: 3 5; metalness: 0; roughness: 1"
+      >
+      </a-entity>
 
-            <!-- Grass Outside-->
-            <a-entity geometry="primitive: box; depth: 500; height: 0.05; width: 500" position="0 0 0" material="src: url(images/grass.jpg); repeat: 500 500; metalness: 0; roughness: 1"></a-entity>
+      <a-entity
+        geometry="primitive: box; depth: 15; height:10; width: 0.2"
+        position="-15 5 10"
+        material="src: url(images/wall_2.jpg); repeat: 30 10; metalness: 0; roughness: 1"
+      >
+      </a-entity>
 
+      <!--South Wall-->
+      <a-entity
+        geometry="primitive: box; depth: 0.2; height:10; width: 30"
+        position="0 5 -10"
+        material="src: url(images/wall.jpg); repeat: 30 10; metalness: 0; roughness: 1"
+      >
+      </a-entity>
 
-            <!-- Ceiling Lights -->
-            <!-- Hay que repetir la liz para que se vea bien -->
-            <a-entity position="-5 3 0">
-                <a-entity class="MainLighting" light="type: point; intensity: 0.75; distance: 50; castShadow:true;" position="0 2 0"></a-entity>
-                <a-gltf-model src="#ceiling_light" scale="25 25 25"></a-gltf-model>
-            </a-entity>
+      <!-- Grass Outside-->
+      <a-entity
+        geometry="primitive: box; depth: 500; height: 0.05; width: 500"
+        position="0 0 0"
+        material="src: url(images/grass.jpg); repeat: 500 500; metalness: 0; roughness: 1"
+      >
+      </a-entity>
 
-            <a-entity position="5 3 0">
-                <a-entity class="MainLighting" light="type: point; intensity: 0.75; distance: 50; castShadow:true" position="0 2 0"></a-entity>
-                <a-gltf-model src="#ceiling_light" scale="25 25 25"></a-gltf-model>
-            </a-entity>
+      <!-- Ceiling Lights -->
+      <a-entity position="-5 3 0">
+        <a-entity
+          class="MainLighting"
+          light="type: point; intensity: 0.75; distance: 50; castShadow:true;"
+          position="0 2 0"
+        >
+        </a-entity>
 
-            <!--Picture -->
-            <a-entity geometry="primitive: box; depth: 7; height: 0.1; width: 6.6" position="7 5 9.9" material="src: url(images/Mural_Energia_2.jpg)") rotation="270 180 0">
-            </a-entity>
-            
-            <a-entity geometry="primitive: box; depth: 7; height: 0.1; width: 6.6" position="-3 5 9.9" material="src: url(images/Mural_Energia_3.jpg)") rotation="270 180 0">
-            </a-entity>
-     
+        <a-gltf-model src="#ceiling_light" scale="25 25 25"> </a-gltf-model>
+      </a-entity>
 
-        </a-scene>
-    </body>
+      <a-entity position="5 3 0">
+        <a-entity
+          class="MainLighting"
+          light="type: point; intensity: 0.75; distance: 50; castShadow:true;"
+          position="0 2 0"
+        >
+        </a-entity>
+
+        <a-gltf-model src="#ceiling_light" scale="25 25 25"> </a-gltf-model>
+      </a-entity>
+
+      <!--Picture -->
+      <a-entity
+        geometry="primitive: box; depth: 7; height: 0.1; width: 6.6"
+        position="7 5 9.9"
+        material="src: url(images/Mural_Energia_2.jpg)"
+        )
+        rotation="270 180 0"
+      >
+      </a-entity>
+
+      <a-entity
+        geometry="primitive: box; depth: 7; height: 0.1; width: 6.6"
+        position="-3 5 9.9"
+        material="src: url(images/Mural_Energia_3.jpg)"
+        )
+        rotation="270 180 0"
+      >
+      </a-entity>
+    </a-scene>
+  </body>
 </html>
